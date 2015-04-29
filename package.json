@@ -1,13 +1,9 @@
 {
-  "name": "grunt-json-angular-translate",
-  "version": "0.1.17",
-  "description": "Converts json files to angular translate config javascript files.",
-  "repository": "git@github.com:shahata/grunt-json-angular-translate.git",
-  "bugs": "git@github.com:shahata/grunt-json-angular-translate.gitissues",
-  "author": {
-    "name": "Shahar Talmi",
-    "email": ""
-  },
+  "name": "grunt-plntr-locale",
+  "version": "0.0.1",
+  "description": "Converts YAML localization files to Planitar angular Locale services",
+  "repository": "git@github.com:PlanitarInc/grunt-json-angular-translate.git",
+  "bugs": "git@github.com:PlanitarInc/grunt-json-angular-translate.gitissues",
   "keywords": [
     "gruntplugin"
   ],

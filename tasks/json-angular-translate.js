@@ -101,7 +101,7 @@ angular.module('<%= moduleName %>')
 
       grunt.file.write(file.dest, src);
 
-      grunt.log.writeln('File "' + file.dest + '" created.');
+      grunt.log.writeln('Created locale file: "' + file.src +'" -> "' + file.dest + '"');
     });
   });
 

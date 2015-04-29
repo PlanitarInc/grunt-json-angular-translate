@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('wixTranslations')
+angular.module('app.i18n')
   .service('locale.ru', function () {
     var locale = {
       'a': 'b',

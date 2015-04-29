@@ -32,7 +32,7 @@ module.exports = function (grunt) {
     },
 
     // Configuration to be run (and then tested).
-    jsonAngularTranslate: {
+    plntrLocale: {
       default_options: {
         options: {
           moduleName: 'wixTranslations'
@@ -73,11 +73,8 @@ module.exports = function (grunt) {
           ext: '.js'
         }]
       },
-      no_prefer_language: {
-        options: {
-          moduleName: 'wixTranslations',
-          hasPreferredLanguage: false
-        },
+      nomodulename: {
+        options: {},
         files: [{
           expand: true,
           cwd: 'test/fixtures',
@@ -110,10 +107,11 @@ module.exports = function (grunt) {
 
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
+  grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'jsonAngularTranslate', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'plntrLocale', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);

@@ -1,6 +1,6 @@
-# grunt-json-angular-translate [![Build Status](https://travis-ci.org/shahata/grunt-json-angular-translate.svg?branch=master)](https://travis-ci.org/shahata/grunt-json-angular-translate)
+# grunt-plntr-locale [![Build Status](https://travis-ci.org/PlanitarInc/grunt-json-angular-translate.svg?branch=master)](https://travis-ci.org/PlanitarInc/grunt-json-angular-translate)
 
-> Converts json files to [angular-translate](https://github.com/angular-translate/angular-translate) config javascript files.
+> Converts YAML localization files to Planitar angular Locale services.
 
 ## Getting Started
 This plugin requires Grunt.
@@ -8,28 +8,27 @@ This plugin requires Grunt.
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-json-angular-translate --save-dev
+npm install grunt-plntr-locale --save-dev
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('grunt-json-angular-translate');
+grunt.loadNpmTasks('grunt-plntr-locale');
 ```
 
-## The "jsonAngularTranslate" task
+## The "plntrLocale" task
 
 ### Overview
-In your project's Gruntfile, add a section named `jsonAngularTranslate` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `plntrLocale` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  jsonAngularTranslate: {
+  plntrLocale: {
     jobName: {
       options: {
-        moduleName: 'translations',
+        moduleName: 'app.i18n',
         extractLanguage: /..(?=\.[^.]*$)/,
-        hasPreferredLanguage: true
       },
       files: [{
         // Target-specific file lists and/or options go here. (see examples below)
@@ -43,21 +42,15 @@ grunt.initConfig({
 
 #### options.moduleName
 Type: `String`
-Default value: `translations`
+Default value: `app.i18n`
 
-The module name to use in the `angular.module` calls.
+i18n module name.
 
 #### options.extractLanguage
 Type: `RegExp|Function`
 Default value: `/..(?=\.[^.]*$)/` (last two characters before the last dot)
 
 A regular expression or a function that returns the processed file's language according to its file path.
-
-#### options.hasPreferredLanguage
-Type: `Boolean`
-Default value: `true`
-
-Whether to set the language and preferred language in config file. Relevant only in angular-translate `1.*`.
 
 #### options.createNestedKeys
 Type: `Boolean`
@@ -67,16 +60,16 @@ Whether to create a nested output from dot separated keys.
 
 ##### Source json
 ```
-{
-  "My.First.Key": "..."
+key:
+  "subkey.phraseId": "..."
 }
 ```
 ##### Outputs
 ```
 {
-  'My': {
-    'First': {
-      'Key': '...'
+  'key': {
+    'subkey': {
+      'phraseId': '...'
     }
   }
 }
@@ -86,7 +79,9 @@ Set this option to false if you use your source language string as the key.
 ##### createNestedKeys: false, Outputs
 ```
 {
-  'My.First.Key': '...'
+  "key": {
+    "subkey.phraseId": "..."
+  }
 }
 ```
 
@@ -97,7 +92,7 @@ In this example, we convert all .json files in `app/scripts/locale` to angular-t
 
 ```js
 grunt.initConfig({
-  jsonAngularTranslate: {
+  plntrLocale: {
     jobName: {
       options: {},
       files: [{
@@ -150,7 +145,7 @@ In this example, we convert all .json files in `app/scripts/locale` to angular-t
 
 ```js
 grunt.initConfig({
-  jsonAngularTranslate: {
+  plntrLocale: {
     jobName: {
       options: {
         moduleName: 'myAppTranslations',

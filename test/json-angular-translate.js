@@ -35,20 +35,20 @@ exports.jsonAngularTranslate = {
   },
   pattern_language: function (test) {
     var actual = grunt.file.read('tmp/test2/messages_ru.js');
-    var expected = grunt.file.read('test/expected/messages_ru.js').replace(/'ru'/g, '\'te\'');
+    var expected = grunt.file.read('test/expected/messages_ru.js').replace(/'locale.ru'/g, '\'locale.te\'');
     test.equal(actual, expected, 'should be able to override language matching with my own pattern');
     test.done();
   },
   function_language: function (test) {
     var actual = grunt.file.read('tmp/test3/messages_ru.js');
-    var expected = grunt.file.read('test/expected/messages_ru.js').replace(/'ru'/g, '\'on\'');
+    var expected = grunt.file.read('test/expected/messages_ru.js').replace(/'locale.ru'/g, '\'locale.on\'');
     test.equal(actual, expected, 'should be able to override language matching with my own function');
     test.done();
   },
   no_prefer_language: function (test) {
     var actual = grunt.file.read('tmp/test4/messages_ru.js');
-    var expected = grunt.file.read('test/expected/messages_ru.legacy.js');
-    test.equal(actual, expected, 'should be able to override language matching with my own function');
+    var expected = grunt.file.read('test/expected/messages_ru.default_modulename.js');
+    test.equal(actual, expected, 'modulename should default to "i18n"');
     test.done();
   },
   flat_option: function (test) {

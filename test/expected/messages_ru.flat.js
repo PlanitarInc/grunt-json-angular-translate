@@ -1,20 +1,11 @@
 'use strict';
 
-try {
-  angular.module('wixTranslations');
-} catch (e) {
-  angular.module('wixTranslations', ['pascalprecht.translate']);
-}
-
-angular.module('wixTranslations').config(['$translateProvider',
-  function ($translateProvider) {
-    var translations = {
+angular.module('wixTranslations')
+  .service('locale.ru', function () {
+    var locale = {
       'a': 'b',
       'c.x': 'd',
       'c.y': 'e'
     };
-    $translateProvider.translations('ru', translations);
-    $translateProvider.translations(translations);
-    $translateProvider.preferredLanguage('ru');
-  }
-]);
+    return locale;
+  });

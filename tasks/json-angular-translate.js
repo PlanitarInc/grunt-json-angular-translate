@@ -42,12 +42,11 @@ function reverse(json) {
 }
 
 module.exports = function (grunt) {
-  grunt.registerMultiTask('jsonAngularTranslate', 'The best Grunt plugin ever.', function () {
+  grunt.registerMultiTask('plntrLocale', 'The best Grunt plugin ever.', function () {
     var extractLanguage;
     var options = this.options({
-      moduleName: 'translations',
+      moduleName: 'app.i18n',
       extractLanguage: /..(?=\.[^.]*$)/,
-      hasPreferredLanguage: true,
       createNestedKeys: true
     });
 
@@ -80,39 +79,23 @@ module.exports = function (grunt) {
         language = currLanguage;
 
         var processor = (options.createNestedKeys ? unflatten : reverse);
-        return processor(JSON.parse(grunt.file.read(filepath)));
+        return processor(grunt.file.readYAML(filepath));
       }).reduce(extend, {});
 
-      src = grunt.template.process(multiline(options.hasPreferredLanguage ? function(){/*
+      src = grunt.template.process(multiline(function(){/*
 'use strict';
 
-try {
-  angular.module('<%= moduleName %>');
-} catch (e) {
-  angular.module('<%= moduleName %>', ['pascalprecht.translate']);
-}
-
-angular.module('<%= moduleName %>').config(['$translateProvider', function ($translateProvider) {
-  var translations = <%= translations %>;
-  $translateProvider.translations('<%= language %>', translations);
-  $translateProvider.translations(translations);
-  $translateProvider.preferredLanguage('<%= language %>');
-}]);
-      */} : function(){/*
-'use strict';
-
-try {
-  angular.module('<%= moduleName %>');
-} catch (e) {
-  angular.module('<%= moduleName %>', ['pascalprecht.translate']);
-}
-
-angular.module('<%= moduleName %>').config(['$translateProvider', function ($translateProvider) {
-  var translations = <%= translations %>;
-  $translateProvider.translations('<%= language %>', translations);
-  $translateProvider.translations(translations);
-}]);
-      */}), {data: {language: language, moduleName: options.moduleName, translations: toSingleQuotes(JSON.stringify(src))}});
+angular.module('<%= moduleName %>')
+  .service('locale.<%= language %>', function () {
+    var locale = <%= text %>;
+    return locale;
+  });
+*/
+      }), {data: {
+        language: language,
+        moduleName: options.moduleName,
+        text: toSingleQuotes(JSON.stringify(src))},
+      });
 
       src = jb(src, {'indent_size': 2, 'jslint_happy': true}) + '\n';
 

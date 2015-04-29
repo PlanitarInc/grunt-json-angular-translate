@@ -1,6 +1,6 @@
 {
   "name": "grunt-plntr-locale",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Converts YAML localization files to Planitar angular Locale services",
   "repository": "git@github.com:PlanitarInc/grunt-json-angular-translate.git",
   "bugs": "git@github.com:PlanitarInc/grunt-json-angular-translate.gitissues",
